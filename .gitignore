@@ -1,7 +1,10 @@
 /.vscode
-/day1.exe
-/day2.exe
-/day3.exe
-/day4.exe
+*.exe
 /input.txt
 /output.txt
+/day1.cpp
+/day2.cpp
+/day3.cpp
+/day4.cpp
+/day5.cpp
+/day6.cpp
