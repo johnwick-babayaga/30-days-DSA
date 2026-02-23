@@ -167,7 +167,7 @@ int main()
     printMatrix(matrix);
     cout << endl;
     // setZeroes(matrix);
-    // setMatrixZeroes(matrix);
+    setMatrixZeroes(matrix);
     optimalSetZeores(matrix);
     printMatrix(matrix);
 }
