@@ -1,32 +1,42 @@
 #include <bits/stdc++.h>
-    using namespace std;
+using namespace std;
 
-void printArray(vector<int>&nums){
-        for(auto it : nums){
-            cout << it << " ";
-        }
+void printArray(vector<int> &nums)
+{
+    for (auto it : nums)
+    {
+        cout << it << " ";
     }
-int partitionArr(vector<int>&nums, int low, int high){
+}
+
+int partitionArr(vector<int> &nums, int low, int high)
+{
     int pivot = nums[low];
     int i = low;
     int j = high;
-    while(i < j){
-        while(nums[i] <= pivot && i <= high-1){
+    while (i < j)
+    {
+        while (nums[i] <= pivot && i <= high - 1)
+        {
             i++;
         }
-        while(nums[j] > pivot && j >= low+1){
+        while (nums[j] > pivot && j >= low + 1)
+        {
             j--;
         }
-        if(i < j) swap(nums[i], nums[j]);
+        if (i < j)
+            swap(nums[i], nums[j]);
     }
     swap(nums[low], nums[j]);
     return j;
 }
-void quickSort(vector<int>&nums, int low, int high){
-    if(low<high){
+void quickSort(vector<int> &nums, int low, int high)
+{
+    if (low < high)
+    {
         int pIndex = partitionArr(nums, low, high);
-        quickSort(nums, low, pIndex-1);
-        quickSort(nums, pIndex+1, high);
+        quickSort(nums, low, pIndex - 1);
+        quickSort(nums, pIndex + 1, high);
     }
 }
 
@@ -77,20 +87,76 @@ vector<int> majorityElement(vector<int> &nums)
     }
     return ans;
 }
+int nCr(int r, int c)
+{
+    int numerator = 1, denominator = 1;
+    for (int i = 0; i < c; i++)
+    {
+        numerator = numerator * (r - i);
+        denominator = denominator * (i + 1);
+    }
+    return numerator / denominator;
+}
+
+vector<long long> pascalRow(int n)
+{
+    vector<long long> ans;
+    long long prod = 1;
+    ans.push_back(1);
+    for (int i = 1; i < n; i++)
+    {
+        prod = prod * (n - i);
+        prod = prod / (i);
+        ans.push_back(prod);
+    }
+    return ans;
+}
+vector<vector<long long>> pascalTriangle(int n)
+{
+    vector<vector<long long>> answer;
+    for (int i = 1; i <= n; i++)
+    {
+        answer.push_back(pascalRow(i));
+    }
+
+    return answer;
+}
+
+void printPascal(vector<vector<long long>> &triangle)
+{
+    for (auto &row : triangle)
+    {
+        cout << "[ ";
+        for (auto val : row)
+        {
+            cout << val << " ";
+        }
+        cout << "]\n";
+    }
+}
 
 int main()
 {
     int n;
     cin >> n;
-    vector<int>nums(n);
-    for(auto &it : nums){
+    vector<int> nums(n);
+    for (auto &it : nums)
+    {
         cin >> it;
     }
     printArray(nums);
-    cout<< endl;
+    cout << endl;
 
     // quickSort(nums, 0, n-1 );
     // printArray(nums);
-    vector<int>res = majorityElement(nums);
-    printArray(res);
+    // vector<int>res = majorityElement(nums);
+    // printArray(res);
+    // cout<< nCr(10, 3);
+    // FIND THE ELEMENT at (R, C) in PASCAL TRIANGLE
+    // int r =4, c = 3;
+    // cout << nCr(r-1, c-1);
+    // vector<long long> result = pascalRow(n);
+    // printArray(result);
+    vector<vector<long long>> final = pascalTriangle(n);
+    printPascal(final);
 }
